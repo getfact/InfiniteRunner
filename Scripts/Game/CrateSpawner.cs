@@ -1,13 +1,15 @@
 using UnityEngine;
+using System.Collections;
 
 public class CrateSpawner : MonoBehaviour {
 
-    public GameObject cratePrefab;
+    public GameObject doubleCratePrefab;
+    public GameObject tripleCratePrefab;
     public Transform spawnPoint;
 
     void Awake () {
 
-        Spawn();
+        RandomCrate();
     }
 
     void Update () {
@@ -17,12 +19,26 @@ public class CrateSpawner : MonoBehaviour {
             return;
         }
 
-        Spawn();
+        RandomCrate();
     }
 
-    public void Spawn () {
+    private void RandomCrate () {
+
+        if (Random.value < 0.5f) {
+
+            Spawn(tripleCratePrefab);
+        }
+
+        else {
+
+
+            Spawn(doubleCratePrefab);
+        }
+    }
+
+    public void Spawn (GameObject prefab) {
 
         CrateController.isDead = false;
-        Instantiate(cratePrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

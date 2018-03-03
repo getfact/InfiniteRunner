@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class CrateController : MonoBehaviour {
+public class BirdController : MonoBehaviour {
 
     public static bool isDead = false;
 
     public float speed;
-    public int points = 20;
 
     void Update () {
 
@@ -21,15 +20,16 @@ public class CrateController : MonoBehaviour {
 
         if (this != null) {
 
-            speed = SpeedManager.worldSpeed;
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
     }
 
     private void Die () {
 
+
         isDead = true;
-        PlayerStats.score += points;
+
         Destroy(gameObject);
+
     }
 }
