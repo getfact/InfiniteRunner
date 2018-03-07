@@ -5,10 +5,11 @@ public class BirdSpawner : MonoBehaviour {
 
     public GameObject birdPrefab;
     public Transform spawnPoint;
+    public Transform secondSpawnPoint;
 
     void Awake () {
 
-        Spawn();
+        RandomSpawn();
     }
 
     void Update () {
@@ -18,13 +19,25 @@ public class BirdSpawner : MonoBehaviour {
             return;
         }
 
-        Spawn();
-
+        RandomSpawn();
     }
 
-    private void Spawn () {
+    private void RandomSpawn () {
+
+        if (Random.value < 0.5f) {
+
+            Spawn(spawnPoint);
+        }
+
+        else {
+
+            Spawn(secondSpawnPoint);
+        }
+    }
+
+    private void Spawn (Transform spawn) {
 
         BirdController.isDead = false;
-        Instantiate(birdPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(birdPrefab, spawn.position, spawn.rotation);
     }
 }
